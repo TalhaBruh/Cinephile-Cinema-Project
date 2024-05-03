@@ -22,3 +22,29 @@
     <script src="functions.js"></script>
 </body>
 </html>
+<div class="signin">
+    <h3>S I G N - I N</h3>
+    <form>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Username/Email</td>
+                    <td>
+                        <input name="username" type="text" required oninvalid="this.setCustomValidity('Please enter your username or email')" oninput="setCustomValidity('')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>
+                        <input name="password" type="password" required oninvalid="this.setCustomValidity('Please enter your password')" oninput="setCustomValidity('')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit" value="Submit" onclick="validateSignIn()">Login</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
