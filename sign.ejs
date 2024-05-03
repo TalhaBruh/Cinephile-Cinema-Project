@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cinephile</title>
-    <link rel="icon" type="image/png" href="cp.png">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="icon" type="image/png" href="cp.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="header">
-        <h1>Cinephile</h1>
+      <h1>Cinephile</h1>
     </div>
 
     <div class="topnav">
-        <a href="/">Home</a> |
-        <a href="/explore">Explore</a> |
-        <a href="/trailers">Upcoming Movies</a> |
-        <a href="/sign">Sign In / Sign Up</a>
+      <a href="/">Home</a> | <a href="/explore">Explore</a> |
+      <a href="/trailers">Upcoming Movies</a> |
+      <a href="/sign">Sign In / Sign Up</a>
     </div>
-  
+
     <script src="functions.js"></script>
-</body>
+  </body>
 </html>
 <div class="signin">
-    <h3>S I G N - I N</h3>
-    <form>
-        <table>
-            <tbody>
-                <tr>
-                    <td>Username/Email</td>
-                    <td>
-                        <input name="username" type="text" required oninvalid="this.setCustomValidity('Please enter your username or email')" oninput="setCustomValidity('')"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td>
-                        <input name="password" type="password" required oninvalid="this.setCustomValidity('Please enter your password')" oninput="setCustomValidity('')"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <button type="submit" value="Submit" onclick="validateSignIn()">Login</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
+  <h3>SIgnIn</h3>
+  <form>
+    <table>
+      <tbody>
+        <tr>
+          <td>Username/Email</td>
+          <td>
+            <input
+              name="username"
+              type="text"
+              required
+              oninvalid="this.setCustomValidity('Please enter your username or email')"
+              oninput="setCustomValidity('')"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>
+            <input
+              name="password"
+              type="password"
+              required
+              oninvalid="this.setCustomValidity('Please enter your password')"
+              oninput="setCustomValidity('')"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <button type="submit" value="Submit" onclick="validateSignIn()">
+              Login
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
 </div>
