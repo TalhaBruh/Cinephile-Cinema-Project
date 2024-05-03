@@ -61,3 +61,41 @@
     </table>
   </form>
 </div>
+<div class="signup">
+    <h3>S I G N - U P</h3>
+    <form>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Full Name</td>
+                    <td>
+                        <input name="name" type="text" required oninvalid="this.setCustomValidity('Please enter your full name')" oninput="setCustomValidity('')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td>
+                        <input name="username" type="text" required oninvalid="this.setCustomValidity('Please enter your username')" oninput="setCustomValidity('')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td>
+                        <input name="phone" type="tel" required oninvalid="this.setCustomValidity('Please enter your phone number')" oninput="setCustomValidity('')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>
+                        <input name="password" type="password" required oninvalid="this.setCustomValidity('Please enter your password')" oninput="setCustomValidity('')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit" value="Submit" onclick="validateSignUp()">Signup</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
