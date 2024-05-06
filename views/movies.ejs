@@ -1,33 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Movie Page!</title>
+  <title>Movie Page!</title>
+  <style>
+    body {
+      padding: 50px;
+      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+      background: #666;
+      color: #ccc;
+    }
+    a {
+      color: #00B7FF;
+    }
+  </style>
 </head>
 <body>
-	<h1>List of movies in the database</h1>
-	<ul>
-		<% movies.forEach(function(movie) { %>
-		<li>
-			Name: <strong> <%= movie.name %> </strong> <br>
-			Release Date <strong> <%= movie.releaseDate %> </strong>
-			<br><br>
-		</li>
-		<% }); %>
-	</ul>
+  <h1>List of movies in the database</h1>
+  <ul>
+    <% movies.forEach(function(movie) { %>
+    <li>
+      Name: <strong> <%= movie.name %> </strong> <br>
+      Release Date: <strong> <%= movie.releaseDate %> </strong>
+      <br><br>
+    </li>
+    <% }); %>
+  </ul>
 </body>
 </html>
-
-<style>
-	body {
-		padding: 50px;
-		font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-		background: #666;
-		color: #ccc;
-	  }
-	  
-	  a {
-		color: #00B7FF;
-	  }
-	  
-
-</style>
