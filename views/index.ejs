@@ -48,3 +48,23 @@
           </form>
         </div>
       </div>
+
+      <div class="container">
+        <h1 class="display-4">Movie List So Far</h1>
+        <h3>Your added movies will go here. Click to Update or Delete the movie from the list.</h3>
+        <br />
+        <div class="row">
+          <% movies.forEach(function(movie) { %>
+          <div class="col-sm-6 mb-4">
+            <div class="card">
+              <div class="card-header"><%= movie.name %></div>
+              <div class="card-body">
+                <p class="card-text">Release Date: <%= movie.releaseDate %></p>
+                <a href="#" class="btn btn-danger">Delete</a>
+                <a href="#" class="btn btn-primary">Update</a>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
