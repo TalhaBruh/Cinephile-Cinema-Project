@@ -43,5 +43,13 @@ router.post('/', function (req, res, next) {
     votes: 0
   });
 
- 
+  // Save Movie in the database
+  movie.save()
+    .then(movies => {
+      res.status(200).redirect('/explore');
+    }).catch(err => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the movie entry."
+      });
+    });
 });
