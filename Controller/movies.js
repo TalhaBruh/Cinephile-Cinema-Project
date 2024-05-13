@@ -22,3 +22,11 @@ router.get('/', function (req, res, next) {
     });
 });
 
+// POST
+router.post('/', function (req, res, next) {
+
+  mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
+    .then(() => console.log('connected to the database'))
+    .catch(err => console.error('error connecting to db: ', err.errmsg));
+
+ 
