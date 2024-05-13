@@ -1,38 +1,38 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var mongoose = require('mongoose');
-var Movie = require('../models/movie');
+var mongoose = require("mongoose");
+var Movie = require("../models/movie");
 
 // GET
-router.get('/', function (req, res, next) {
+router.get("/", function (req, res, next) {
+  mongoose
+    .connect(process.env.DB_HOST, { useNewUrlParser: true })
+    .then(() => console.log("connected to the database"))
+    .catch((err) => console.error("error connecting to db: ", err.errmsg));
 
-  mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
-    .then(() => console.log('connected to the database'))
-    .catch(err => console.error('error connecting to db: ', err.errmsg));
-
-  Movie
-    .find()
-    .sort('name')
-    .then(movies => {
-      res.render('movies', { title: 'movie page', movies });
-    }).catch(err => {
+  Movie.find()
+    .sort("name")
+    .then((movies) => {
+      res.render("movies", { title: "movie page", movies });
+    })
+    .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving notes."
+        message: err.message || "Some error occurred while retrieving notes.",
       });
     });
 });
 
 // POST
-router.post('/', function (req, res, next) {
-
-  mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
-    .then(() => console.log('connected to the database'))
-    .catch(err => console.error('error connecting to db: ', err.errmsg));
+router.post("/", function (req, res, next) {
+  mongoose
+    .connect(process.env.DB_HOST, { useNewUrlParser: true })
+    .then(() => console.log("connected to the database"))
+    .catch((err) => console.error("error connecting to db: ", err.errmsg));
 
   // Validate request
   if (!req.body.name || !req.body.releaseDate) {
     return res.status(400).send({
-      message: "Movie content can not be empty"
+      message: "Movie content can not be empty",
     });
   }
 
@@ -40,16 +40,19 @@ router.post('/', function (req, res, next) {
   const movie = new Movie({
     name: req.body.name,
     releaseDate: req.body.releaseDate,
-    votes: 0
+    votes: 0,
   });
 
   // Save Movie in the database
-  movie.save()
-    .then(movies => {
-      res.status(200).redirect('/explore');
-    }).catch(err => {
+  movie
+    .save()
+    .then((movies) => {
+      res.status(200).redirect("/explore");
+    })
+    .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the movie entry."
+        message:
+          err.message || "Some error occurred while creating the movie entry.",
       });
     });
 });
