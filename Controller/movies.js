@@ -36,4 +36,12 @@ router.post('/', function (req, res, next) {
     });
   }
 
-  
+  // Create a Movie
+  const movie = new Movie({
+    name: req.body.name,
+    releaseDate: req.body.releaseDate,
+    votes: 0
+  });
+
+ 
+});
