@@ -29,4 +29,11 @@ router.post('/', function (req, res, next) {
     .then(() => console.log('connected to the database'))
     .catch(err => console.error('error connecting to db: ', err.errmsg));
 
- 
+  // Validate request
+  if (!req.body.name || !req.body.releaseDate) {
+    return res.status(400).send({
+      message: "Movie content can not be empty"
+    });
+  }
+
+  
