@@ -63,6 +63,16 @@ router.delete('movies/:id', function (req, res, next) {
     .then(() => console.log('connected to the database'))
     .catch(err => console.error('error connecting to db: ', err.errmsg));
 
-
+  Movie.deleteOne({ _id: req.params.id })
+    .then(() => {
+      console.log('Movie deleted successfully');
+      res.status(200).redirect('/');
+    })
+    .catch(err => {
+      console.error('Error deleting movie:', err);
+      res.status(500).send({
+        message: err.message || "Some error occurred while deleting the movie entry."
+      });
+    });
 });
 
