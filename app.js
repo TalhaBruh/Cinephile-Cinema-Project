@@ -12,3 +12,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
+// Load the Movie model
+
+var Movie = require('./models/movie');
+var indexRouter = require('./Controller/index');
+var usersRouter = require('./Controller/users');
+var moviesRouter = require('./Controller/movies');
+
