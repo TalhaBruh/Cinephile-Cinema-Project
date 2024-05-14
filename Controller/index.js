@@ -21,3 +21,5 @@ router.get('/explore', function(req, res, next) {
     });
 
 });
+
+module.exports = router;
