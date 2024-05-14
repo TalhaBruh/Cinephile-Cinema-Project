@@ -76,3 +76,31 @@ router.delete('movies/:id', function (req, res, next) {
     });
 });
 
+// MAKE
+router.get('/make', function (req, res, next) {
+  mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
+    .then(() => console.log('connected to the database'))
+    .catch(err => console.error('error connecting to db: ', err.errmsg));
+
+  // Make two example movies to populate the database
+  var movie1 = new Movie({
+    name: 'Alien',
+    releaseDate: 1979,
+    votes: 1
+  });
+  var movie2 = new Movie({
+    name: 'Jaws',
+    releaseDate: 1975,
+    votes: 0
+  });
+
+  movie1.save(function (err) {
+    if (err) throw err;
+  });
+  movie2.save(function (err) {
+    if (err) throw err;
+  });
+  res.status(200).send('Saved!');
+});
+
+module.exports = router;
