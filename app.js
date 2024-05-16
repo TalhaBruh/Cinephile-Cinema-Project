@@ -19,3 +19,6 @@ var indexRouter = require('./Controller/index');
 var usersRouter = require('./Controller/users');
 var moviesRouter = require('./Controller/movies');
 
+// Express Application
+var app = express();
+console.log("starting")
