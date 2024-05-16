@@ -34,3 +34,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/',(req,res)=>{
 	res.render("home.ejs")
 })
+
+// Routing the Controllers
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/movies', moviesRouter);
+
+app.get('/sign',(req,res)=>{
+	res.render("sign.ejs");
+})
+
+app.get('/trailers',(req,res)=>{
+	res.render("trailers.ejs");
+})
