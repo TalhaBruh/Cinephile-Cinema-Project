@@ -22,3 +22,7 @@ var moviesRouter = require('./Controller/movies');
 // Express Application
 var app = express();
 console.log("starting")
+
+// Connecting the FrontEnd
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
