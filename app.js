@@ -6,9 +6,9 @@ var dotenv = require('dotenv').config();
 var logger = require('morgan');
 var connectDB = require('./db');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var moviesRouter = require('./routes/movies');
+var indexRouter = require('./Controller/index');
+var usersRouter = require('./Controller/users');
+var moviesRouter = require('./Controller/movies');
 
 var app = express();
 
