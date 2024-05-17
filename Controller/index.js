@@ -1,14 +1,9 @@
 var express = require("express");
 var router = express.Router();
-var mongoose = require("mongoose");
 var Movie = require("../models/movie");
 
 /* GET home page. */
 router.get("/explore", function (req, res, next) {
-  mongoose
-    .connect(process.env.DB_HOST, { useNewUrlParser: true })
-    .then(() => console.log("connected to the database"))
-    .catch((err) => console.error("error connecting to db: ", err.errmsg));
   Movie.find()
     .sort("name")
     .then((movies) => {
@@ -16,9 +11,9 @@ router.get("/explore", function (req, res, next) {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving notes.",
+        message: err.message || "Some error occurred while retrieving movies.",
       });
     });
-})
+});
 
 module.exports = router;
