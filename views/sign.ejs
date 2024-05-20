@@ -1,129 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cinephile</title>
-  <link rel="icon" type="image/png" href="cp.png" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cinephile</title>
+    <link rel="icon" type="image/png" href="cp.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      function showError(message) {
+        const modal = document.getElementById('errorModal');
+        const modalMessage = document.getElementById('modalMessage');
+        modalMessage.textContent = message;
+        modal.style.display = 'block';
 
-<body>
-  <div class="header">
-    <h1>Cinephile</h1>
-  </div>
+        // Automatically close the modal after 3 seconds
+        setTimeout(() => {
+          modal.style.display = 'none';
+        }, 3000);
+      }
 
-  <div class="topnav">
-    <a href="/">Home</a> | <a href="/explore">Explore</a> |
-    <a href="/trailers">Upcoming Movies</a> |
-    <a href="/sign">Sign In / Sign Up</a>
-  </div>
+      window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+          showError('Invalid user');
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Cinephile</h1>
+    </div>
+    <div class="topnav">
+      <a href="/">Home</a> | <a href="/explore">Explore</a> |
+      <a href="/trailers">Upcoming Movies</a> |
+      <a href="/sign">Sign In / Sign Up</a>
+    </div>
+    <div class="signin">
+      <h3>SignIn</h3>
+      <form action="/auth/signin" method="POST">
+        <table>
+          <tbody>
+            <tr>
+              <td>Username/Email</td>
+              <td>
+                <input
+                  name="username"
+                  type="text"
+                  required
+                  oninvalid="this.setCustomValidity('Please enter your username or email')"
+                  oninput="setCustomValidity('')"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Password</td>
+              <td>
+                <input
+                  name="password"
+                  type="password"
+                  required
+                  oninvalid="this.setCustomValidity('Please enter your password')"
+                  oninput="setCustomValidity('')"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button type="submit" value="Submit">
+                  Login
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <div class="signup">
+      <h3>SignUp</h3>
+      <form action="/auth/signup" method="POST">
+        <table>
+          <tbody>
+            <tr>
+              <td>Full Name</td>
+              <td>
+                <input
+                  name="name"
+                  type="text"
+                  required
+                  oninvalid="this.setCustomValidity('Please enter your full name')"
+                  oninput="setCustomValidity('')"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Username</td>
+              <td>
+                <input
+                  name="username"
+                  type="text"
+                  required
+                  oninvalid="this.setCustomValidity('Please enter your username')"
+                  oninput="setCustomValidity('')"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Phone Number</td>
+              <td>
+                <input
+                  name="phone"
+                  type="tel"
+                  required
+                  oninvalid="this.setCustomValidity('Please enter your phone number')"
+                  oninput="setCustomValidity('')"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Password</td>
+              <td>
+                <input
+                  name="password"
+                  type="password"
+                  required
+                  oninvalid="this.setCustomValidity('Please enter your password')"
+                  oninput="setCustomValidity('')"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button type="submit" value="Submit">
+                  Signup
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
 
-  <div class="signin">
-    <h3>Sign In</h3>
-    <form action="/auth/login" method="post">
-      <table>
-        <tbody>
-          <tr>
-            <td>Username/Email</td>
-            <td>
-              <input
-                name="username"
-                type="text"
-                required
-                oninvalid="this.setCustomValidity('Please enter your username or email')"
-                oninput="setCustomValidity('')"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Password</td>
-            <td>
-              <input
-                name="password"
-                type="password"
-                required
-                oninvalid="this.setCustomValidity('Please enter your password')"
-                oninput="setCustomValidity('')"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <button type="submit" value="Submit">Login</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
-  </div>
-
-  <div class="signup">
-    <h3>Sign Up</h3>
-    <form action="/auth/signup" method="post">
-      <table>
-        <tbody>
-          <tr>
-            <td>Full Name</td>
-            <td>
-              <input
-                name="name"
-                type="text"
-                required
-                oninvalid="this.setCustomValidity('Please enter your full name')"
-                oninput="setCustomValidity('')"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Username</td>
-            <td>
-              <input
-                name="username"
-                type="text"
-                required
-                oninvalid="this.setCustomValidity('Please enter your username')"
-                oninput="setCustomValidity('')"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Phone Number</td>
-            <td>
-              <input
-                name="phone"
-                type="tel"
-                required
-                oninvalid="this.setCustomValidity('Please enter your phone number')"
-                oninput="setCustomValidity('')"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Password</td>
-            <td>
-              <input
-                name="password"
-                type="password"
-                required
-                oninvalid="this.setCustomValidity('Please enter your password')"
-                oninput="setCustomValidity('')"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <button type="submit" value="Submit">Signup</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
-  </div>
-
-  <script src="functions.js"></script>
-</body>
+    <!-- Error Modal -->
+    <div id="errorModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="document.getElementById('errorModal').style.display='none'">&times;</span>
+        <p id="modalMessage"></p>
+      </div>
+    </div>
+  </body>
 </html>
+
 
 <style>
   body,
@@ -228,5 +255,44 @@
     padding: 10px;
     margin-top: 20px;
     margin: -25px 0 0 -25px;
+  }
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    justify-content: center; /* Center the modal content */
+    align-items: center; /* Center the modal content */
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px;
+    text-align: center;
+    border-radius: 8px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
   }
 </style>
