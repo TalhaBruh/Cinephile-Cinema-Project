@@ -61,7 +61,10 @@ router.post('/signin', async (req, res) => {
       { expiresIn: '1h' },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+
+        // Set the token in a cookie
+        res.cookie('token', token, { httpOnly: true });
+        res.redirect('/'); // Redirect to home.ejs
       }
     );
   } catch (err) {
