@@ -40,13 +40,13 @@ router.post('/signin', async (req, res) => {
     let user = await User.findOne({ username });
 
     if (!user) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
+      return res.redirect('/signin?error=invalid');
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
+      return res.redirect('/signin?error=invalid');
     }
 
     const payload = {
