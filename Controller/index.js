@@ -1,9 +1,10 @@
 var express = require("express");
 var router = express.Router();
 var Movie = require("../models/movie");
+const authenticateToken = require('../middleware/auth');
 
 /* GET home page. */
-router.get("/explore", function (req, res, next) {
+router.get("/explore", authenticateToken, function (req, res, next) {
   Movie.find()
     .sort("name")
     .then((movies) => {

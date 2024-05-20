@@ -6,16 +6,17 @@ var dotenv = require('dotenv').config();
 var logger = require('morgan');
 var connectDB = require('./db');
 
-var indexRouter = require('./Controller/index');
-var usersRouter = require('./Controller/users');
-var moviesRouter = require('./Controller/movies');
+var indexRouter = require('./controller/index');
+var usersRouter = require('./controller/users');
+var moviesRouter = require('./controller/movies');
+var authRouter = require('./controller/authcontroller');
 
 var app = express();
 
 // Connect to the database
 connectDB();
 
-console.log("starting")
+console.log("starting");
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -34,6 +35,7 @@ app.get('/', (req, res) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/movies', moviesRouter);
+app.use('/auth', authRouter);
 
 app.get('/sign', (req, res) => {
   res.render("sign.ejs");
@@ -41,6 +43,10 @@ app.get('/sign', (req, res) => {
 
 app.get('/trailers', (req, res) => {
   res.render("trailers.ejs");
+});
+
+app.get('/signin', (req, res) => {
+  res.render("signin.ejs");
 });
 
 // catch 404 and forward to error handler
