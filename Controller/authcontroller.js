@@ -1,55 +1,73 @@
-const express = require('express');
-const router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+var express = require('express');
+var router = express.Router();
+var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
+var User = require('../models/user');
 
-// Sign Up
+// User signup
 router.post('/signup', async (req, res) => {
   const { username, password } = req.body;
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Username and password are required' });
-  }
-
-  const userExists = await User.findOne({ username });
-  if (userExists) {
-    return res.status(400).json({ message: 'Username already taken' });
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const newUser = new User({
-    username,
-    password: hashedPassword
-  });
 
   try {
-    await newUser.save();
-    res.status(201).json({ message: 'User created successfully' });
+    let user = await User.findOne({ username });
+
+    if (user) {
+      return res.status(400).json({ msg: 'User already exists' });
+    }
+
+    user = new User({
+      username,
+      password
+    });
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+
+    await user.save();
+
+    res.status(201).json({ msg: 'User created successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Error creating user' });
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 });
 
-// Log In
-router.post('/login', async (req, res) => {
+// User signin
+router.post('/signin', async (req, res) => {
   const { username, password } = req.body;
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Username and password are required' });
-  }
 
-  const user = await User.findOne({ username });
-  if (!user) {
-    return res.status(400).json({ message: 'Invalid credentials' });
-  }
+  try {
+    let user = await User.findOne({ username });
 
-  const validPassword = await bcrypt.compare(password, user.password);
-  if (!validPassword) {
-    return res.status(400).json({ message: 'Invalid credentials' });
-  }
+    if (!user) {
+      return res.status(400).json({ msg: 'Invalid credentials' });
+    }
 
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  res.cookie('token', token, { httpOnly: true }).json({ message: 'Logged in successfully' });
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ msg: 'Invalid credentials' });
+    }
+
+    const payload = {
+      user: {
+        id: user.id
+      }
+    };
+
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
 });
 
 module.exports = router;
