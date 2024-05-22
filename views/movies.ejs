@@ -12,6 +12,12 @@
       Name : <strong> <%= movie.name %> </strong> <br>
       Release Date: <strong> <%= movie.releaseDate %> </strong>
       <br><br>
+      <form method="post" action="/movies/<%= movie._id %>?_method=DELETE">
+        <button type="submit">Delete</button>
+      </form>
+      <form method="get" action="/movies/<%= movie._id %>/edit">
+        <button type="submit">Update</button>
+      </form>
     </li>
     <% }); %>
   </ul>
