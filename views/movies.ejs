@@ -8,19 +8,36 @@
   <h1>List of movies in the database</h1>
   <ul>
     <% movies.forEach(function(movie) { %>
-    <li>
+    <li id="<%= movie._id %>"> <!-- Add unique identifier for each movie card -->
       Name : <strong> <%= movie.name %> </strong> <br>
       Release Date: <strong> <%= movie.releaseDate %> </strong>
-      <br><br>
-      <form method="post" action="/movies/<%= movie._id %>?_method=DELETE">
-        <button type="submit">Delete</button>
-      </form>
-      <form method="get" action="/movies/<%= movie._id %>/edit">
-        <button type="submit">Update</button>
-      </form>
+      <!-- Add data attributes to store movie ID -->
+      <button class="delete-movie-btn" data-movie-id="<%= movie._id %>">Delete</button>
     </li>
     <% }); %>
   </ul>
+
+  <!-- Include jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // AJAX request to delete movie
+      $(".delete-movie-btn").click(function() {
+        var movieId = $(this).data("movie-id");
+        $.ajax({
+          url: "/movies/" + movieId,
+          type: "DELETE",
+          success: function(data) {
+            // Remove the deleted movie from the UI
+            $("#" + movieId).remove();
+          },
+          error: function(xhr, status, error) {
+            console.error("Error deleting movie:", error);
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
 

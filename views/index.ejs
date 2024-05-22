@@ -1,102 +1,87 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-      crossorigin="anonymous"
-    />
-    <title>Cinephile</title>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous"
+  />
+  <title>Cinephile</title>
+</head>
 
-  <body>
-    <div class="header">
-      <h1 class="yellow">Cinephile</h1>
-    </div>
-    <div class="topnav">
-      <a href="/">Home</a> |
-      <a href="/explore">Explore</a> |
-      <a href="/trailers">Upcoming Movies</a> |
-      <a href="/sign">SignIn / SignUp</a>
-    </div>
-    
-    <main role="main">
-      <div class="jumbotron">
-        <div class="container">
-          <h3 class="white">Enter your favorite movies, & Create a List</h3>
-          <p class="white">You can't get more exciting than that. Ok let's get started. Add a movie!</p>
-          <form method="post" action="/movies">
-            <div class="row">
-              <div class="col-sm-12 col-md-6 mb-6">
-                <div class="form-group">
-                  <label class="white" for="name">Movie Title</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" />
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-6 mb-6">
-                <div class="form-group">
-                  <label class="white" for="releaseDate">Release Date</label>
-                  <input type="number" class="form-control" id="releaseDate" name="releaseDate" aria-describedby="dateHelp"
-                    placeholder="Enter the release date of this film" />
-                  <small id="dateHelp" class="form-text text-muted">Just enter the year of the release</small>
-                </div>
+<body>
+  <div class="header">
+    <h1 class="yellow">Cinephile</h1>
+  </div>
+  <div class="topnav">
+    <a href="/">Home</a> |
+    <a href="/explore">Explore</a> |
+    <a href="/trailers">Upcoming Movies</a> |
+    <a href="/sign">SignIn / SignUp</a>
+  </div>
+  
+  <main role="main">
+    <div class="jumbotron">
+      <div class="container">
+        <h3 class="white">Enter your favorite movies, & Create a List</h3>
+        <p class="white">You can't get more exciting than that. Ok let's get started. Add a movie!</p>
+        <form method="post" action="/movies">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 mb-6">
+              <div class="form-group">
+                <label class="white" for="name">Movie Title</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" />
               </div>
             </div>
-            <button type="submit" class="btn btn-primary">Add Movie</button>
-          </form>
-        </div>
-      </div>
-
-      <div class="container">
-        <h1 class="display-4">Movie List So Far</h1>
-        <h3>Your added movies will go here. Click to Update or Delete the movie from the list.</h3>
-        <br />
-        <div class="row">
-          <% movies.forEach(function(movie) { %>
-          <div class="col-sm-6 mb-4">
-            <div class="card">
-              <div class="card-header"><%= movie.name %></div>
-              <div class="card-body">
-                <p class="card-text">Release Date: <%= movie.releaseDate %></p>
-                <form method="post" action="/movies/<%= movie._id %>?_method=DELETE">
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-                <form method="get" action="/movies/<%= movie._id %>/edit">
-                  <button type="submit" class="btn btn-primary">Update</button>
-                </form>
+            <div class="col-sm-12 col-md-6 mb-6">
+              <div class="form-group">
+                <label class="white" for="releaseDate">Release Date</label>
+                <input type="number" class="form-control" id="releaseDate" name="releaseDate" aria-describedby="dateHelp"
+                  placeholder="Enter the release date of this film" />
+                <small id="dateHelp" class="form-text text-muted">Just enter the year of the release</small>
               </div>
             </div>
           </div>
-          <% }); %>
-        </div>
+          <button type="submit" class="btn btn-primary">Add Movie</button>
+        </form>
       </div>
-      <hr />
-    </main>
+    </div>
 
-    <footer class="container">
-      <p>© COMSATS 2023-2024</p>
-    </footer>
+    <div class="container">
+      <h1 class="display-4">Movie List So Far</h1>
+      <h3>Your added movies will go here. Click to Update or Delete the movie from the list.</h3>
+      <br />
+      <div class="row">
+        <% movies.forEach(function(movie) { %>
+        <div class="col-sm-6 mb-4" id="<%= movie._id %>">
+          <div class="card">
+            <div class="card-header"><%= movie.name %></div>
+            <div class="card-body">
+              <p class="card-text">Release Date: <%= movie.releaseDate %></p>
+              <button type="button" class="btn btn-danger delete-movie-btn" data-movie-id="<%= movie._id %>">Delete</button>
+              <form method="get" action="/movies/<%= movie._id %>/edit">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+    <hr />
+  </main>
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <footer class="container">
+    <p>© COMSATS 2023-2024</p>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
 </html>
+
 
 
 <style>
@@ -136,3 +121,4 @@
     color: white;
   }
 </style>
+

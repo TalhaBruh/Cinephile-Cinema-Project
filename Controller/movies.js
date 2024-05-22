@@ -46,11 +46,11 @@ router.post("/", function (req, res, next) {
 });
 
 // DELETE
-router.delete("movies/:id", function (req, res, next) {
+router.delete("/:id", function (req, res, next) {
   Movie.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Movie deleted successfully");
-      res.status(200).redirect("/");
+      res.status(200).redirect("/explore"); // Redirect to the movies page
     })
     .catch((err) => {
       console.error("Error deleting movie:", err);
@@ -58,26 +58,6 @@ router.delete("movies/:id", function (req, res, next) {
         message: err.message || "Some error occurred while deleting the movie entry.",
       });
     });
-});
-
-// MAKE
-router.get("/make", function (req, res, next) {
-  // Make two example movies to populate the database
-  var movie1 = new Movie({
-    name: "Alien",
-    releaseDate: 1979,
-    votes: 1,
-  });
-  var movie2 = new Movie({
-    name: "Jaws",
-    releaseDate: 1975,
-    votes: 0,
-  });
-
-  movie1.save();
-  movie2.save();
-
-  res.status(200).send("Saved!");
 });
 
 module.exports = router;
