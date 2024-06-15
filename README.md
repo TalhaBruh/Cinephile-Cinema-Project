@@ -1,4 +1,4 @@
-# Cinephile by Talha Hussain FA20-BCS-049
+# Cinephile - A movie list project
 
 ### Movie database project using Node/Express, MongoDB and Mongoose
 
