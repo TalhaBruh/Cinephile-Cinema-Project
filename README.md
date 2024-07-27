@@ -1,6 +1,6 @@
 # Cinephile - A movie list project
 
-### Movie database project using Node/Express, MongoDB and Mongoose
+### Movies Diary Project using Node/Express, MongoDB and Mongoose
 
 
 ![Screenshot 2024-05-21 202333](https://github.com/TalhaBruh/Mood-Therapy-ChatBot-NextJS-using-GPT3.5/assets/79919912/323bac14-2412-4aea-8e9c-10b21ccd8fc0)
@@ -29,4 +29,4 @@ The main page will have a form to add your favorite movies, and also display all
 ```
 localhost:3000
 ```
-```
+
